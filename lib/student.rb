@@ -4,9 +4,9 @@ class Student
   def self.all_students_in_grade_9
       #returns an array of all students in grades 9 
     sql = <<-SQL
-      SELECT *
+      SELECT * /* SELECT COUNT(*) */
       FROM students
-      WHERE grade = 9
+      WHERE grade = 9 /* ; */
     SQL
 
     DB[:conn].execute(sql).map do |row|
@@ -33,7 +33,9 @@ class Student
       SELECT *
       FROM students
       WHERE grade = 10
+      /* ORDER BY students.id */
       LIMIT #{x_students}
+      /* limit? */
     SQL
 
     DB[:conn].execute(sql).map do |row|
@@ -43,10 +45,11 @@ class Student
 
   def self.first_student_in_grade_10
       #returns the first student in grade 10
-      sql = <<-SQL
+    sql = <<-SQL
       SELECT *
       FROM students
       WHERE grade = 10
+      /* ORDER BY students.id */
       LIMIT 1
     SQL
 
@@ -61,6 +64,7 @@ class Student
       SELECT *
       FROM students
       WHERE grade = ?
+      /* ORDER BY students.id */
     SQL
 
     DB[:conn].execute(sql, grade).map do |row|
